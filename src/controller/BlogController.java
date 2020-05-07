@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Blog;
+
 
 
 
 @WebServlet(urlPatterns= {"/blog"})
 public class BlogController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Blog obj;
        
 
     public BlogController() {
-        super();
-        // TODO Auto-generated constructor stub
+        super();   
     }
 
 
@@ -31,12 +33,25 @@ public class BlogController extends HttpServlet {
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*		String blogDetails = request.getParameter("selectedAnswers");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response, Blog blog, Object user) throws ServletException, IOException {
+		String blogDetails = request.getParameter("selectedAnswers");
+		
+		
+		String[] details=blogDetails.split(",");
+		String blogTittle=details[0];
+		String blogDescription=details[1];
+		LocalDate date=LocalDate.now();
 		
 		
 		
-
+		Blog obj = new Blog(blogTittle, blogDescription, date); 
+		
+		 blog.setDescription(blogDescription);
+		 blog.setTitle(blogTittle);
+		 blog.setDate(date);
+		 System.out.println("Blog Tittle:"+blogTittle);
+		 System.out.println("Blog Description:"+blogDescription);
+		 System.out.println("Posted on:"+date);
 		
 		if(blog!=null) {
 			request.setAttribute("blog", blog);
@@ -44,7 +59,7 @@ public class BlogController extends HttpServlet {
 			RequestDispatcher rd=this.getServletContext().getRequestDispatcher("/WEB-INF/views/blogView.jsp");
 			rd.forward(request, response);
 		}
-	*/	
+		
 	}
 
 }
